@@ -69,6 +69,15 @@ def input_check(rows, input):
   return False
 
 
+def is_rows_full(rows):
+  for i in rows:
+    for j in i:
+      if j == ' ':
+        return False
+
+  return True
+
+
 def main():
   rows = [[' ',' ',' '], [' ',' ',' '], [' ',' ',' ']]
   display(rows)
@@ -86,6 +95,10 @@ def main():
     if is_won:
       winner = 'x'
       break
+    elif is_rows_full(rows):
+      winner = None
+      break
+
 
     input_ok = False
     while not input_ok:
@@ -96,8 +109,14 @@ def main():
     is_won = check_is_won(rows, 'y')
     if is_won:
       winner = 'y'
+    elif is_rows_full(rows):
+      winner = None
+      break
   
-  print(f'Winner is {winner}! Congrats!')
+  if winner:
+    print(f'Winner is {winner}! Congrats!')
+  else:
+    print('You tied.')
 
 if __name__ == '__main__':
   main()
